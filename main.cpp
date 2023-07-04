@@ -4,28 +4,44 @@ using namespace std;
 #include <cstring>
 
 int main(int argc, char *argv[]) {
-    Stack s;
-  int i;
-  for(i = 1; i < argc; i++) {
-    if(argv[i][0] == 'x'){
-      s.pop();
-    } 
-    else{
-      s.push(atoi(argv[i]));
+  Stack s;
+  int match = 1;
+  char c;
+
+  int i,j;
+  for (j = 1; j < argc; j++) {
+    for (i = 0; i < strlen(argv[j]); i++) { 
+      // open bracket [ { -> 'push'
+      // close bracket ] } -> 'pop' & check
+      switch (argv[j][i]) { 
+      case '[':
+      case '{':
+        s.push(argv[j][i]);
+        break;
+
+      case ']':
+        c = s.pop(); // c must b [ to match
+        if (c != '[')
+          match = 0;
+        break;
+
+      case '}':
+        c = s.pop(); // c must b { to match
+        if (c != '{')
+          match = 0;
+        break;
+
+      default:
+        break;
+      }
     }
   }
-  /*s.push(5);
-  s.push(1);
-  s.push(7);
-  s.push(6);
-  s.pop(); // 6
-  s.pop(); // 7
-  s.push(3);
-  s.push(4);
-  s.pop(); // 4
-  s.pop(); // 3
-  s.pop(); // 1
-  s.pop(); // 5
-  s.pop();
-  s.pop();*/
+  if (match == 0)
+    cout << "Parentheses doesn't match" << endl;
+  else if (s.Getsize() > 0)
+    cout << "Too many open brackets" << endl; // too many open
+  else
+    cout << "Parentheses match" << endl;
+
+  // clear stack
 }
