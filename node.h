@@ -2,13 +2,13 @@
 #define node_h
 
 class NODE {
-  int data;
+  char data;
   NODE *nextPtr;
 
 public:
   NODE(char);
   ~NODE();
-  int get_value();
+  char get_value();
   void set_next(NODE *);
   NODE *get_next();
 };
@@ -18,7 +18,7 @@ NODE::NODE(char x) {
   data = x;
   nextPtr = NULL;
 }
-int NODE::get_value() { return data; }
+char NODE::get_value() { return data; }
 
 NODE *NODE::get_next() { return nextPtr; }
 

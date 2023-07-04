@@ -10,8 +10,9 @@ private:
 public:
   Stack(NodePtr = NULL);
   ~Stack();
-  int pop();
-  void push(int);
+  char pop();
+  void push(char);
+  int Getsize();
 };
 
 Stack::Stack(NodePtr t) {
@@ -24,7 +25,7 @@ Stack::Stack(NodePtr t) {
   }
 }
 
-void Stack::push(int x) {
+void Stack::push(char x) {
   NodePtr new_node = new NODE(x); // 1
   if (new_node) {
     new_node->set_next(top); // 2
@@ -35,9 +36,9 @@ void Stack::push(int x) {
   // Left missing for exercises…
 }
 
-int Stack::pop() {
+char Stack::pop() {
   NodePtr t = top;
-  int value; // return value
+  char value; // return value
   if (t) {
     
     value = t->get_value();
@@ -53,14 +54,17 @@ int Stack::pop() {
   
 Stack::~Stack(){
   cout << "Clearing all stacks" << endl;
-  int i;
   NodePtr t = top;
-  for (i = 0; i < size; i++) {
+  for (int i = 0; i < size; i++) {
     top = top->get_next();
     delete t;
     t = top;
   }
   // while(size>0) pop();
+}
+
+int Stack::Getsize(){
+  return size;
 }
 
 #endif
